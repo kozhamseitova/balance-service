@@ -8,7 +8,6 @@ import (
 	"os/signal"
 	"syscall"
 
-
 	"github.com/kozhamseitova/balance-service/internal/app"
 	"golang.org/x/sync/errgroup"
 )
