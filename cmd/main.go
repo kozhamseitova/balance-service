@@ -12,6 +12,16 @@ import (
 	"golang.org/x/sync/errgroup"
 )
 
+
+// @title           Balance Service API
+// @version         1.0
+// @description     Server for working with balance. 
+
+// @contact.name   Aisha
+// @contact.email  kozhamseitova91@gmail.com
+
+// @host      localhost:8080
+// @BasePath  /api/v1
 func main() {
 	ctx, cancel := context.WithCancel(context.Background())
 	go func() {

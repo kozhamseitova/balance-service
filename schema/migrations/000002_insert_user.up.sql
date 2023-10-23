@@ -1,0 +1,1 @@
+INSERT INTO users (username, balance) values ("username1", 0)

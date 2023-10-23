@@ -32,9 +32,8 @@ func New(ctx context.Context) (*App, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed to init db: %w", err)
 	}
-	fmt.Println(database.Pool)
 
-	repo := repository.New(database.Pool)
+	repo := repository.New(database.Pool, logger)
 	service := service.New(config, logger, repo)
 	handler := handler.New(logger, service)
 

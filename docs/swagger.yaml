@@ -1,0 +1,164 @@
+basePath: /api/v1
+definitions:
+  api.Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    type: object
+  api.Ok:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  models.BalanceInput:
+    properties:
+      amount:
+        type: integer
+      id:
+        type: integer
+    type: object
+  models.ReserveInput:
+    properties:
+      amount:
+        type: integer
+      order_id:
+        type: integer
+      service_id:
+        type: integer
+      user_id:
+        type: integer
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: kozhamseitova91@gmail.com
+    name: Aisha
+  description: Server for working with balance.
+  title: Balance Service API
+  version: "1.0"
+paths:
+  /balance/{id}:
+    get:
+      description: Retrieve the balance of a user by their user ID.
+      operationId: getBalanceByUserID
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Ok'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.Error'
+      summary: Get the balance of a user by user ID
+  /balance/credit:
+    post:
+      description: Deposit a specified amount of funds into the user's account.
+      operationId: depositFunds
+      parameters:
+      - description: Balance Input
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.BalanceInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Ok'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.Error'
+      summary: Deposit funds into the user's account
+  /balance/recognize:
+    post:
+      description: Recognize revenue for a service and order.
+      operationId: recognizeRevenue
+      parameters:
+      - description: Reserve Input
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ReserveInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Ok'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.Error'
+      summary: Recognize revenue for a service
+  /balance/reserve:
+    post:
+      description: Reserve a specified amount of funds for a service.
+      operationId: reserveFunds
+      parameters:
+      - description: Reserve Input
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/models.ReserveInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Ok'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.Error'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.Error'
+      summary: Reserve funds for a service
+  /report:
+    get:
+      description: Get a report of revenue recognition for all users and services.
+      operationId: getRevenueReport
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.Ok'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/api.Error'
+      summary: Get a report of revenue recognition
+swagger: "2.0"
