@@ -10,8 +10,13 @@ import (
 func(m *monitor) StartReservationMonitor(ctx context.Context) {
     ticker := time.NewTicker(1 * time.Minute) 
 
-    for range ticker.C {
-		m.checkReservations(ctx)
+    for {
+		select {
+		case <-ctx.Done():
+			return
+		case <-ticker.C:
+			m.checkReservations(ctx)
+		}
 	}
 	
 }
