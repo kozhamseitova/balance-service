@@ -31,6 +31,7 @@ func TestReserveFunds(t *testing.T) {
 
 
 	for i := 0; i < numofGoRoutines; i++ {
+		i := i
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
@@ -38,7 +39,7 @@ func TestReserveFunds(t *testing.T) {
 			defer mu.Unlock()
 			data := models.ReserveInput{
 				UserID: 1,
-				ServiceID: 1,
+				ServiceID: i,
 				OrderID: 1,
 				Amount: 200,
 			}
