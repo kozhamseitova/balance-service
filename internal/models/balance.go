@@ -22,3 +22,13 @@ type Report struct {
 	Amount int `json:"amount" db:"amount"`
 	RecognitionDate time.Time `json:"recognition_date" db:"recognition_date"`
 }
+
+
+type BalanceResponse struct {
+	Code    int         `json:"code"`
+	Message string      `json:"message"`
+	Data    BalanceData `json:"data"`
+}
+type BalanceData struct {
+    Balance int `json:"balance"`
+}

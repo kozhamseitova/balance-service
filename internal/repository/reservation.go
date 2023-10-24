@@ -19,27 +19,18 @@ func (r *repository) ReserveFunds(ctx context.Context, userID, serviceID, orderI
     }
     defer tx.Rollback(ctx)
 
-	//checking balance
-	var balance int
-	checkQuery := fmt.Sprintf(`SELECT balance from %s WHERE id = $1 LIMIT 1`, usersTable)
-	row := tx.QueryRow(ctx, checkQuery, userID)
-	err = row.Scan(balance)
-	if err != nil {
-		r.logger.Errorf(ctx, "[ReserveFunds] failed to get user balance: %v", err)
-        return utils.ErrInternalError
-	}
-
-	if balance < price {
-		return utils.ErrInsufficientFunds
-	}
-
     // 1. Withdraw funds from user balance
-    query := fmt.Sprintf(`UPDATE %s SET balance = balance - $1 WHERE id = $2 `, usersTable)
-    _, err = tx.Exec(ctx, query, price, userID)
+    query := fmt.Sprintf(`UPDATE %s SET balance = balance - $1 WHERE id = $2 and balance >= $1`, usersTable)
+    result, err := tx.Exec(ctx, query, price, userID)
     if err != nil {
         r.logger.Errorf(ctx, "[ReserveFunds] failed to update user balance: %v", err)
         return utils.ErrInternalError
     }
+
+	affectedRows := result.RowsAffected()
+	if affectedRows == 0 {
+		return utils.ErrInsufficientFunds
+	}
 
     // 2. Create reservation record
     reservationQuery := fmt.Sprintf("INSERT INTO %s (user_id, service_id, order_id, amount) VALUES ($1, $2, $3, $4)", reservationsTable)

@@ -93,7 +93,7 @@ func(h *Handler) reserveFunds(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(&api.Error{
 			Code:    http.StatusInternalServerError,
-			Message: "internal server error",
+			Message: "invalid param",
 		})
 	}
 
@@ -101,7 +101,7 @@ func(h *Handler) reserveFunds(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(&api.Error{
 			Code:    http.StatusInternalServerError,
-			Message: "internal server error",
+			Message: err.Error(),
 		})
 	}
 
@@ -127,7 +127,7 @@ func(h *Handler) recognizeRevenue(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(&api.Error{
 			Code:    http.StatusInternalServerError,
-			Message: "internal server error",
+			Message: "invalid param",
 		})
 	}
 
@@ -135,7 +135,7 @@ func(h *Handler) recognizeRevenue(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(http.StatusInternalServerError).JSON(&api.Error{
 			Code:    http.StatusInternalServerError,
-			Message: "internal server error",
+			Message: err.Error(),
 		})
 	}
 
