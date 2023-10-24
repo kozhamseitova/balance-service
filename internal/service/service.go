@@ -16,6 +16,7 @@ type Service interface {
 	ReserveFunds(ctx context.Context, userID, serviceID, orderID, price int) error
 	RecognizeRevenue(ctx context.Context, userID, serviceID, orderID, price int) error
 	GetReport(ctx context.Context) ([]*models.Report, error)
+	CanselReservation(ctx context.Context, userID, serviceId int) error
 }
 
 type service struct {

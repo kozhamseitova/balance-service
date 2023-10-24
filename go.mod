@@ -19,9 +19,11 @@ require (
 	github.com/go-openapi/swag v0.22.4 // indirect
 	github.com/gofrs/uuid v4.0.0+incompatible // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
+	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
 	github.com/jackc/fake v0.0.0-20150926172116-812a484cc733 // indirect
 	github.com/jackc/pgio v1.0.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgproto3/v2 v2.3.2 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
 	github.com/jackc/puddle/v2 v2.2.1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
@@ -53,6 +55,7 @@ require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
 	github.com/georgysavva/scany/v2 v2.0.0
 	github.com/google/uuid v1.3.1
+	github.com/jackc/pgconn v1.14.1
 	github.com/jackc/pgtype v1.14.0
 	github.com/jackc/pgx v3.6.2+incompatible
 	github.com/jackc/pgx/v5 v5.4.3

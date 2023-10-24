@@ -41,3 +41,7 @@ func(s *service) RecognizeRevenue(ctx context.Context, userID, serviceID, orderI
 func(s *service) GetReport(ctx context.Context) ([]*models.Report, error){
 	return s.repo.GetReport(ctx)
 }
+
+func(s *service) CanselReservation(ctx context.Context, userID, serviceId int) error {
+	return s.repo.CanselReservation(ctx, userID, serviceId)
+}

@@ -9,4 +9,5 @@ var (
 	ErrInsufficientFunds = errors.New("insufficient funds")
 	ErrInvalidAmount = errors.New("invalid amount")
 	ErrInvalidCredentials = errors.New("invalid credentials")
+	ErrDuplicateKey = errors.New("service already ordered by this user")
 ) 
