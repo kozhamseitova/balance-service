@@ -23,6 +23,5 @@ func (h *Handler) InitRoutes(router *fiber.App) {
 	balance.Post("/credit", h.deposit)
 	balance.Post("/reserve", h.reserveFunds)
 	balance.Post("/revenue" ,h.recognizeRevenue)
-	balance.Delete("/reserve", h.cancelReservation)
 
 }

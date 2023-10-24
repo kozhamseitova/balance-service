@@ -39,7 +39,7 @@ func TestReserveFunds(t *testing.T) {
 			defer mu.Unlock()
 			data := models.ReserveInput{
 				UserID: 1,
-				ServiceID: i,
+				ServiceID: i+9,
 				OrderID: 1,
 				Amount: 200,
 			}

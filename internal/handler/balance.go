@@ -169,28 +169,3 @@ func(h *Handler) getReport(c *fiber.Ctx) error {
 		Data: result,
 	})
 }
-
-func(h *Handler) cancelReservation(c *fiber.Ctx) error {
-	var req models.ReserveInput 
-
-	err := c.BodyParser(&req)
-	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(&api.Error{
-			Code:    http.StatusInternalServerError,
-			Message: "invalid param",
-		})
-	}
-
-	err = h.service.CanselReservation(c.UserContext(), req.UserID, req.ServiceID)
-	if err != nil {
-		return c.Status(http.StatusInternalServerError).JSON(&api.Error{
-			Code:    http.StatusInternalServerError,
-			Message: err.Error(),
-		})
-	}
-
-	return c.Status(http.StatusOK).JSON(&api.Ok{
-		Code:    http.StatusOK,
-		Message: "succes",
-	})
-}

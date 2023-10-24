@@ -6,6 +6,7 @@ import (
 
 	"github.com/kozhamseitova/balance-service/internal/config"
 	"github.com/kozhamseitova/balance-service/internal/handler"
+	"github.com/kozhamseitova/balance-service/internal/monitor"
 	"github.com/kozhamseitova/balance-service/internal/repository"
 	"github.com/kozhamseitova/balance-service/internal/server"
 	"github.com/kozhamseitova/balance-service/internal/service"
@@ -38,6 +39,9 @@ func New(ctx context.Context) (*App, error) {
 	handler := handler.New(logger, service)
 
 	server := server.New(config, logger, handler)
+
+	monitor := monitor.New(logger, repo)
+	go monitor.StartReservationMonitor(ctx)
 
 	return &App{
 		server: server,

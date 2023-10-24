@@ -170,3 +170,16 @@ func(r *repository) CanselReservation(ctx context.Context, userID, serviceId int
     }
 	return nil
 }
+
+func (r *repository) GetNotRecognizedReservations(ctx context.Context) ([]*models.Reservation, error) {
+	var reservations []*models.Reservation
+
+	query := fmt.Sprintf(`SELECT id, user_id, service_id, order_id, amount, reserved_at from %s WHERE recognized_at is NULL`, reservationsTable)
+	err := pgxscan.Select(ctx, r.pool, &reservations, query)
+	if err != nil {
+		r.logger.Errorf(ctx, "[GetNotRecognizedReservations] err: %v", err)
+		return nil, utils.ErrInternalError
+	}
+	
+	return reservations, nil
+}

@@ -15,6 +15,8 @@ type Repository interface {
 	RecognizeRevenue(ctx context.Context, userID, serviceID, orderID, price int) error
 	GetReport(ctx context.Context) ([]*models.Report, error)
 	CanselReservation(ctx context.Context, userID, serviceId int) error
+
+	GetNotRecognizedReservations(ctx context.Context) ([]*models.Reservation, error)
  }
 
 type repository struct {

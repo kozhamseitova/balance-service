@@ -32,3 +32,13 @@ type BalanceResponse struct {
 type BalanceData struct {
     Balance int `json:"balance"`
 }
+
+type Reservation struct {
+	Id int `json:"id" db:"id"`
+	UserID int `json:"user_id" db:"user_id"`
+	ServiceID int `json:"service_id" db:"service_id"`
+	OrderID int `json:"order_id" db:"order_id"`
+	Amount int `json:"amount" db:"amount"`
+	ReservedAt time.Time `json:"reserved_at" db:"reserved_at"`
+	RecognizedAt time.Time `json:"recognized_at" db:"-"`
+}
